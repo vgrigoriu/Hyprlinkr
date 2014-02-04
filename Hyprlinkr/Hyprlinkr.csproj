@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeRouteDispatcher.cs" />
     <Compile Include="DefaultRouteDispatcher.cs" />
     <Compile Include="CompositeRouteDispatcher.cs" />
     <Compile Include="ScalarRouteValuesQuery.cs" />
