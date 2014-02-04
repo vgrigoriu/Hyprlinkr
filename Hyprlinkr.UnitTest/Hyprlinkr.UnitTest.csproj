@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoHypDataAttribute.cs" />
+    <Compile Include="CompositeRouteDispatcherTests.cs" />
     <Compile Include="Controllers\AmbiguousActionController.cs" />
     <Compile Include="Controllers\BarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
