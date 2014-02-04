@@ -54,7 +54,7 @@ namespace Ploeh.Hyprlinkr
         /// <param name="method">The method expression.</param>
         /// <param name="routeValues">Route values.</param>
         /// <returns>
-        /// An object containing the route name, as well as the route values.
+        /// An enumeration of one object containing the route name, as well as the route values.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">method</exception>
         /// <remarks>
@@ -70,7 +70,7 @@ namespace Ploeh.Hyprlinkr
         /// </para>
         /// </remarks>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "This method should produce URIs with lower-case letters, so ultimately, it would have to invoke some sort of ToLower method.")]
-        public Rouple Dispatch(
+        public IEnumerable<Rouple> Dispatch(
             MethodCallExpression method,
             IDictionary<string, object> routeValues)
         {
@@ -78,16 +78,20 @@ namespace Ploeh.Hyprlinkr
                 throw new ArgumentNullException("method");
 
             var newRouteValues = new Dictionary<string, object>(routeValues);
+            return DispatchImpl(method, newRouteValues);
+        }
 
+        private IEnumerable<Rouple> DispatchImpl(MethodCallExpression method, Dictionary<string, object> routeValues)
+        {
             var controllerName = method
                 .Object
                 .Type
                 .Name
                 .ToLowerInvariant()
                 .Replace("controller", "");
-            newRouteValues["controller"] = controllerName;
+            routeValues["controller"] = controllerName;
 
-            return new Rouple(this.routeName, newRouteValues);
+            yield return new Rouple(this.routeName, routeValues);
         }
 
         /// <summary>

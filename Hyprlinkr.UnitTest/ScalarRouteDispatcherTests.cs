@@ -49,7 +49,7 @@ namespace Ploeh.Hyprlinkr.UnitTest
             IDictionary<string, object> routeValues)
         {
             var actual = sut.Dispatch(method, routeValues);
-            Assert.Equal("DefaultApi", actual.RouteName);
+            Assert.Equal("DefaultApi", actual.First().RouteName);
         }
 
         [Theory, AutoHypData]
@@ -59,7 +59,7 @@ namespace Ploeh.Hyprlinkr.UnitTest
             IDictionary<string, object> routeValues)
         {
             var actual = sut.Dispatch(method, routeValues);
-            Assert.Equal(sut.RouteName, actual.RouteName);
+            Assert.Equal(sut.RouteName, actual.First().RouteName);
         }
 
         [Theory, AutoHypData]
@@ -71,7 +71,7 @@ namespace Ploeh.Hyprlinkr.UnitTest
             var actual = sut.Dispatch(method, routeValues);
 
             var expected = new HashSet<KeyValuePair<string, object>>(routeValues);
-            Assert.True(expected.IsSubsetOf(actual.RouteValues));
+            Assert.True(expected.IsSubsetOf(actual.First().RouteValues));
         }
 
         [Theory, AutoHypData]
@@ -82,7 +82,7 @@ namespace Ploeh.Hyprlinkr.UnitTest
             Expression<Action<FooController>> exp = c => c.GetDefault();
             var method = (MethodCallExpression)exp.Body;
             var actual = sut.Dispatch(method, routeValues);
-            Assert.Equal("foo", actual.RouteValues["controller"]);
+            Assert.Equal("foo", actual.First().RouteValues["controller"]);
         }
 
         [Theory, AutoHypData]
@@ -93,7 +93,7 @@ namespace Ploeh.Hyprlinkr.UnitTest
             Expression<Action<BarController>> exp = c => c.GetDefault();
             var method = (MethodCallExpression)exp.Body;
             var actual = sut.Dispatch(method, routeValues);
-            Assert.Equal("bar", actual.RouteValues["controller"]);
+            Assert.Equal("bar", actual.First().RouteValues["controller"]);
         }
 
         [Theory, AutoHypData]

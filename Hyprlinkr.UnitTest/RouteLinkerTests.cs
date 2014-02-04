@@ -135,7 +135,7 @@ namespace Ploeh.Hyprlinkr.UnitTest
                         It.Is<MethodCallExpression>(exp => method.Equals(exp.Method)),
                         It.IsAny<IDictionary<string, object>>()))
                 .Returns((MethodCallExpression _, IDictionary<string, object> routeValues) =>
-                    new Rouple(routeName, routeValues));
+                    new []{new Rouple(routeName, routeValues)});
 
             // Act
             var actual = sut.GetUri<FooController>(r =>

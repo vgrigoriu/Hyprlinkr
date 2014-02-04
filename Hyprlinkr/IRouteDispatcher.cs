@@ -31,7 +31,7 @@ namespace Ploeh.Hyprlinkr
         /// <param name="method">The method expression.</param>
         /// <param name="routeValues">Route values.</param>
         /// <returns>
-        /// An object containing the route name, as well as the route values.
+        /// An enumeration of objects containing the route name, as well as the route values.
         /// </returns>
         /// <remarks>
         /// <para>
@@ -41,7 +41,7 @@ namespace Ploeh.Hyprlinkr
         /// and mutate that copy, leaving the input unmodified.
         /// </para>
         /// </remarks>
-        Rouple Dispatch(
+        IEnumerable<Rouple> Dispatch(
             MethodCallExpression method,
             IDictionary<string, object> routeValues);
     }
